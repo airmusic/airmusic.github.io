@@ -1,10 +1,13 @@
 #!/usr/bin/env bash
 set -o errexit #abort if any command fails
+
+source_branch=${GIT_DEPLOY_BRANCH:-hyde}
 if [[ `git status --porcelain` ]]; then
   # changes
   git add -A
   title=`git log -n 1 --format="%s" HEAD`
   git commit -a -m"$title"
+  git push origin $source_branch
 fi
 exit 
 
