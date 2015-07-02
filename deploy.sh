@@ -1,5 +1,12 @@
 #!/usr/bin/env bash
 set -o errexit #abort if any command fails
+if [[ `git status --porcelain` ]]; then
+  # changes
+  git add -A
+  title=`git log -n 1 --format="%s" HEAD`
+  git commit -a -m"$title"
+fi
+
 hugo -d dist
 deploy_directory=${GIT_DEPLOY_DIR:-dist}
 deploy_branch=${GIT_DEPLOY_BRANCH:-master}
