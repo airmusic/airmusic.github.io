@@ -22,14 +22,6 @@ default_email=${GIT_DEPLOY_EMAIL:-}
 #repository to deploy to. must be readable and writable.
 repo=${GIT_DEPLOY_REPO:-origin}
 
-echo $deploy_directory
-echo $deploy_branch
-echo $default_username
-echo $default_email
-echo $repo
-
-exit 
-
 # Parse arg flags
 while : ; do
 	if [[ $1 = "-v" || $1 = "--verbose" ]]; then

@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
+<head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <title> hyde &middot; hyde </title>
+
+  
+  <link rel="stylesheet" href="http://airmusic.github.io//css/poole.css">
+  <link rel="stylesheet" href="http://airmusic.github.io//css/syntax.css">
+  <link rel="stylesheet" href="http://airmusic.github.io//css/hyde.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface">
+
+  
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144-precomposed.png">
+  <link rel="shortcut icon" href="/favicon.ico">
+
+  
+  <link href="http://airmusic.github.io/index.xml" rel="alternate" type="application/rss+xml" title="hyde" />
+</head>
+
+<body>
+
+<div class="sidebar">
+  <div class="container sidebar-sticky">
+    <div class="sidebar-about">
+      <h1>hyde</h1>
+      <p class="lead">
+      An elegant open source and mobile first theme for <a href="http://hugo.spf13.com">hugo</a> made by <a href="http://twitter.com/mdo">@mdo</a>. Originally made for Jekyll.
+      </p>
+    </div>
+
+    <ul class="sidebar-nav">
+      <li><a href="/">Home</a> </li>
+      
+        <li><a href="/post/Git-Submodule/"> Git Submodule </a></li>
+      
+        <li><a href="/post/UnityVersionControl/"> UnityVersionControl </a></li>
+      
+    </ul>
+
+    <p>&copy; 2015. All rights reserved. </p>
+  </div>
+</div>
+
+
+    <div class="content container">
+<div class="posts">
+
+      
+  <div class="post">
+    <h1 class="post-title">
+      <a href="http://airmusic.github.io/post/Git-Submodule/">
+        Git Submodule
+      </a>
+    </h1>
+
+    <span class="post-date">Thu, Jul 2, 2015</span>
+
+    <p>1.添加子模块</p>
+
+<pre><code class="language-sh">$ git submodule add [url] [path]
+</code></pre>
+
+<p>2.查看子模块</p>
+
+<pre><code class="language-sh">$ git submodule —-查看当前项目用到的子模块
+</code></pre>
+
+<p>3.初始化子模块</p>
+
+<pre><code class="language-sh">$ git submodule init —-只在首次检出仓库时运行一次就行
+</code></pre>
+
+<p>4.更新子模块</p>
+
+<pre><code class="language-sh">$ git submodule update —-每次更新或切换分支后都需要运行一下
+</code></pre>
+
+<p>5.删除子模块：（这一步比较麻烦，只是简单rm的话，可能会出现难以定位的bug）</p>
+
+<pre><code class="language-sh">$ git rm --cached [path]
+编辑.gitmodules文件，将子模块的相关配置节点删除掉
+编辑.git/config文件，将子模块的相关配置节点删除掉[这一步好像很不科学，为什么信息要保存两份？]
+手动删除子模块残留的目录
+</code></pre>
+
+  </div>
+  
+  <div class="post">
+    <h1 class="post-title">
+      <a href="http://airmusic.github.io/post/Welcome/">
+        Welcome
+      </a>
+    </h1>
+
+    <span class="post-date">Wed, Jul 1, 2015</span>
+
+    <p>欢迎欢迎,热烈欢迎&hellip;</p>
+
+<p>欢迎欢迎,热烈欢迎&hellip;</p>
+
+<p>欢迎欢迎,热烈欢迎&hellip;</p>
+
+<p>欢迎欢迎,热烈欢迎&hellip;</p>
+
+<p>欢迎欢迎,热烈欢迎&hellip;</p>
+
+  </div>
+  
+  <div class="post">
+    <h1 class="post-title">
+      <a href="http://airmusic.github.io/post/UnityVersionControl/">
+        UnityVersionControl
+      </a>
+    </h1>
+
+    <span class="post-date">Wed, Jul 1, 2015</span>
+
+    
+
+<h1 id="unity-版本控制插件:1637692fc8b5bf26726f27ff2c06bf18">Unity 版本控制插件</h1>
+
+<p>$ hugo server &ndash;theme=hyde &ndash;buildDrafts</p>
+
+<p>2 pages created</p>
+
+<p>0 tags created</p>
+
+<p>0 categories created</p>
+
+<p>in 5 ms</p>
+
+<p>Serving pages from exampleHugoSite/public</p>
+
+<p>Web Server is available at <a href="http://localhost:1313">http://localhost:1313</a></p>
+
+<p>Press Ctrl+C to stop</p>
+
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th align="right">Age</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>Bob</td>
+<td align="right">27</td>
+</tr>
+
+<tr>
+<td>Alice</td>
+<td align="right">23</td>
+</tr>
+
+<tr>
+<td>=======</td>
+<td align="right">====</td>
+</tr>
+
+<tr>
+<td>Charlie</td>
+<td align="right">4</td>
+</tr>
+</tbody>
+</table>
+
+  </div>
+  
+</div>
+</div>
+
+  </body>
+</html>

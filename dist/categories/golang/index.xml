@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Golang on hyde</title>
+    <link>http://airmusic.github.io/categories/golang/</link>
+    <description>Recent content in Golang on hyde</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 02 Jul 2015 09:40:08 +0800</lastBuildDate>
+    <atom:link href="http://airmusic.github.io/categories/golang/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Git Submodule</title>
+      <link>http://airmusic.github.io/post/Git-Submodule/</link>
+      <pubDate>Thu, 02 Jul 2015 09:40:08 +0800</pubDate>
+      
+      <guid>http://airmusic.github.io/post/Git-Submodule/</guid>
+      <description>&lt;p&gt;1.添加子模块&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ git submodule add [url] [path]
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;2.查看子模块&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ git submodule —-查看当前项目用到的子模块
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;3.初始化子模块&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ git submodule init —-只在首次检出仓库时运行一次就行
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;4.更新子模块&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ git submodule update —-每次更新或切换分支后都需要运行一下
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;5.删除子模块：（这一步比较麻烦，只是简单rm的话，可能会出现难以定位的bug）&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ git rm --cached [path]
+编辑.gitmodules文件，将子模块的相关配置节点删除掉
+编辑.git/config文件，将子模块的相关配置节点删除掉[这一步好像很不科学，为什么信息要保存两份？]
+手动删除子模块残留的目录
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>UnityVersionControl</title>
+      <link>http://airmusic.github.io/post/UnityVersionControl/</link>
+      <pubDate>Wed, 01 Jul 2015 22:51:20 +0800</pubDate>
+      
+      <guid>http://airmusic.github.io/post/UnityVersionControl/</guid>
+      <description>
+
+&lt;h1 id=&#34;unity-版本控制插件:1637692fc8b5bf26726f27ff2c06bf18&#34;&gt;Unity 版本控制插件&lt;/h1&gt;
+
+&lt;p&gt;$ hugo server &amp;ndash;theme=hyde &amp;ndash;buildDrafts&lt;/p&gt;
+
+&lt;p&gt;2 pages created&lt;/p&gt;
+
+&lt;p&gt;0 tags created&lt;/p&gt;
+
+&lt;p&gt;0 categories created&lt;/p&gt;
+
+&lt;p&gt;in 5 ms&lt;/p&gt;
+
+&lt;p&gt;Serving pages from exampleHugoSite/public&lt;/p&gt;
+
+&lt;p&gt;Web Server is available at &lt;a href=&#34;http://localhost:1313&#34;&gt;http://localhost:1313&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Press Ctrl+C to stop&lt;/p&gt;
+
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Name&lt;/th&gt;
+&lt;th align=&#34;right&#34;&gt;Age&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;Bob&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;27&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;Alice&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;23&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;=======&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;====&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;Charlie&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;4&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>
