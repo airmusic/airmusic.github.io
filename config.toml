@@ -1,7 +1,7 @@
 # Site settings
 baseurl = "http://airmusic.github.io/"
 languageCode = "en-us"
-title = "hyde"
+title = "Happyi"
 theme = "hyde"
 
 
@@ -17,7 +17,7 @@ theme = "hyde"
 	# To provide some metadata for search engines feel free to add a few
     # information about you and your website.
 	
-	# name = "Happyyi" #
-	# description = "一个普通的程序员" #
+	name = "Happyyi"
+	description = "一个普通的程序员"
 
 
