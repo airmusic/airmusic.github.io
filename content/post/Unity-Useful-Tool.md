@@ -61,5 +61,6 @@ Unity带声音压缩Speex:
 不错的插件示例:
 [https://github.com/ManuYasha/ColorTap](https://github.com/ManuYasha/ColorTap)
 
-
-
+unity快捷键
+[http://docs.unity3d.com/ScriptReference/MenuItem.html](http://docs.unity3d.com/ScriptReference/MenuItem.html)
+![http://img.itc.cn/photo/jsu36vO8EdW](http://img.itc.cn/photo/jsu36vO8EdW)

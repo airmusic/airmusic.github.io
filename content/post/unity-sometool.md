@@ -46,3 +46,8 @@ Unity 阳光射线
 
 里面的聊天挺全
 [https://github.com/kok3/test.git](https://github.com/kok3/test.git)
+
+
+
+安卓版本编译环境搭建:
+[http://docs.unity3d.com/Manual/android-sdksetup.html]http://docs.unity3d.com/Manual/android-sdksetup.html
