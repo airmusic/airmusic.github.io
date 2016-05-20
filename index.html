@@ -39,7 +39,7 @@
 
 		captureContainers = [];
 		captureIndex = 0;
-
+		/*
 		// create a large number of slightly complex vector shapes, and give them random positions and velocities:
 		for (var i = 0; i < 10; i++) {
 			var heart = new createjs.Shape();
@@ -49,7 +49,7 @@
 			heart.y = -100;
 
 			container.addChild(heart);
-		}
+		}*/
 
 		// add noodles
 		var product = new createjs.Text("by 一碗凉面出品", "bold 20px Arial", "#FFFFFF");
@@ -81,11 +81,12 @@
 		tips.text += "I Love You\n\n";
 		stage.addChild(tips);
 
+		/*
 		for (i = 0; i < 200; i++) {
 			var captureContainer = new createjs.Container();
 			captureContainer.cache(0, 0, w, h);
 			captureContainers.push(captureContainer);
-		}
+		}*/
 
 		// start the tick and point it at the window so we can do some work before updating the stage:
 		createjs.Ticker.timingMode = createjs.Ticker.RAF;
