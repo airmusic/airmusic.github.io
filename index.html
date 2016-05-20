@@ -1,413 +1,156 @@
+
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
+<html lang="en">
 <head>
-  <link href="http://gmpg.org/xfn/11" rel="profile">
-  <meta http-equiv="content-type" content="text/html; charset=utf-8">
-  <meta name="generator" content="Hugo 0.14" />
+	<meta charset="utf-8">
+	<title>一碗凉面，520专属</title>
+	<script src="../lib/easeljs-NEXT.combined.js"></script>
+<script id="editable">
+	var canvas;
+	var stage;
+	var container;
+	var captureContainers;
+	var captureIndex;
+	var cnt=0;
+	var idx=0;
+	var tips;
+	function handleFileComplete(event) {
+        var soundID = "oah";
+		//createjs.Sound.registerSound("../_assets/oah.mp3", soundID);
+		//createjs.Sound.play(soundID);
+     }
 
-  
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+	function init() {
+		// create a new stage and point it at our canvas:
+		//var music = document.getElementById("music");
+		//music.width = document.body.clientWidth;
 
-  <title> Happyi &middot; Happyi </title>
 
-  
-  <link rel="stylesheet" href="http://airmusic.github.io/css/poole.css">
-  <link rel="stylesheet" href="http://airmusic.github.io/css/syntax.css">
-  <link rel="stylesheet" href="http://airmusic.github.io/css/hyde.css">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface">
+		canvas = document.getElementById("testCanvas");
+		canvas.width = document.body.clientWidth;
+		canvas.height = window.innerHeight - 20 - 106;
+		stage = new createjs.Stage(canvas);
 
-  
-  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144-precomposed.png">
-  <link rel="shortcut icon" href="/favicon.png">
+		var w = canvas.width;
+		var h = canvas.height;
 
-  
-  <link href="http://airmusic.github.io/index.xml" rel="alternate" type="application/rss+xml" title="Happyi" />
+		container = new createjs.Container();
+		stage.addChild(container);
+
+		captureContainers = [];
+		captureIndex = 0;
+
+		// create a large number of slightly complex vector shapes, and give them random positions and velocities:
+		for (var i = 0; i < 10; i++) {
+			var heart = new createjs.Shape();
+			heart.graphics.beginFill(createjs.Graphics.getHSL(Math.random() * 30 - 45, 100, 50 + Math.random() * 30));
+			heart.graphics.moveTo(0, -12).curveTo(1, -20, 8, -20).curveTo(16, -20, 16, -10).curveTo(16, 0, 0, 12);
+			heart.graphics.curveTo(-16, 0, -16, -10).curveTo(-16, -20, -8, -20).curveTo(-1, -20, 0, -12);
+			heart.y = -100;
+
+			container.addChild(heart);
+		}
+
+		// add noodles
+		var product = new createjs.Text("by 一碗凉面出品", "bold 20px Arial", "#FFFFFF");
+		product.textAlign = "left";
+		product.x = w - product.getMeasuredWidth() - 10;
+		product.y = h - product.getMeasuredLineHeight() - 10;
+		product.alpha = 0.6;
+		stage.addChild(product);
+
+
+		tips = new createjs.Text("", "bold 40px Arial", "#FFFFFF");
+		tips.textAlign = "center";
+		tips.x = w / 2;
+		tips.y = h;// 2 - tips.getMeasuredLineHeight();
+		tips.alpha = 0.6;
+		tips.text = "亲爱的玲玲小姐\n\n";
+		tips.text += "我不知道我是什么时候爱上你的\n\n";
+		tips.text += "我也不知道你到底喜不喜欢我\n\n";
+		tips.text += "不过你今天似乎很不开心\n\n";
+		tips.text += "我不知道具体原因,反正可以肯定跟下雨没有任何关系\n\n";
+		tips.text += "哦哈 ,可能是我多想了。。\n\n";
+		tips.text += "不过很希望你能幸福相伴\n\n520节日快乐\n\n";
+		tips.text += "。\n\n";
+		tips.text += "。\n\n";
+		tips.text += "。\n\n";
+		tips.text += "。\n\n";
+		tips.text += "。\n\n";
+		tips.text += "憋了这么久最想说的还是\n\n";
+		tips.text += "I Love You\n\n";
+		stage.addChild(tips);
+
+		for (i = 0; i < 200; i++) {
+			var captureContainer = new createjs.Container();
+			captureContainer.cache(0, 0, w, h);
+			captureContainers.push(captureContainer);
+		}
+
+		// start the tick and point it at the window so we can do some work before updating the stage:
+		createjs.Ticker.timingMode = createjs.Ticker.RAF;
+		createjs.Ticker.addEventListener("tick", tick);
+	}
+
+	function tick(event) {
+		var w = canvas.width;
+		var h = canvas.height;
+		var l = container.getNumChildren();
+		tips.y = tips.y - 1;
+		var th = tips.getMeasuredHeight()
+		if(tips.y+th<-20)
+		{
+			tips.y=h;
+		}
+
+		captureIndex = (captureIndex + 1) % captureContainers.length;
+		stage.removeChildAt(0);
+		var captureContainer = captureContainers[captureIndex];
+		stage.addChildAt(captureContainer, 0);
+		captureContainer.addChild(container);
+
+		// iterate through all the children and move them according to their velocity:
+		for (var i = 0; i < l; i++) {
+			var heart = container.getChildAt(i);
+			if (heart.y < -50) {
+				heart._x = Math.random() * w;
+				heart.y = h * (1 + Math.random()) + 50;
+				heart.perX = (1 + Math.random() * 2) * h;
+				heart.offX = Math.random() * h;
+				heart.ampX = heart.perX * 0.1 * (0.15 + Math.random());
+				heart.velY = -Math.random() * 2 - 1;
+				heart.scaleX = heart.scaleY = Math.random() * 2 + 1;
+				heart._rotation = Math.random() * 40 - 20;
+				heart.alpha = Math.random() * 0.75 + 0.05;
+				heart.compositeOperation = Math.random() < 0.33 ? "lighter" : "source-over";
+			}
+			var int = (heart.offX + heart.y) / heart.perX * Math.PI * 2;
+			heart.y += heart.velY * heart.scaleX / 2;
+			heart.x = heart._x + Math.cos(int) * heart.ampX;
+			heart.rotation = heart._rotation + Math.sin(int) * 30;
+		}
+
+		captureContainer.updateCache("source-over");
+
+		// draw the updates to stage:
+		stage.update(event);
+	}
+
+</script>
 </head>
 
-<body class="">
+<body onload="init();">
 
-<div class="sidebar">
-  <div class="container sidebar-sticky">
-    <div class="sidebar-about">
-      <a href="http://airmusic.github.io/"><h1>Happyi</h1></a>
-      <p class="lead">
-       一个普通的程序员 
-      </p>
-    </div>
+<header class="EaselJS">
+	<!--
+	<h1>你好啊</h1>
+	-->
+</header>
 
-    <ul class="sidebar-nav">
-      <li><a href="/">Home</a> </li>
-      
-        <li><a href="/post/Blog-Tips/"> Blog Tips </a></li>
-      
-        <li><a href="/post/Git-Submodule/"> Git Submodule </a></li>
-      
-        <li><a href="/Unity-SvnTool/"> Unity SvnTool </a></li>
-      
-        <li><a href="/post/Unity-Useful-Tool/"> Unity Useful Tool </a></li>
-      
-        <li><a href="/post/Unity3D-SVN/"> Unity3D项目SVN资源管理的小技巧 </a></li>
-      
-        <li><a href="/post/UnityVersionControl/"> UnityVersionControl </a></li>
-      
-        <li><a href="/post/unity-sometool/"> unity sometool </a></li>
-      
-        <li><a href="/post/taig-jb/"> 苹果破解版本恢复出厂设置 </a></li>
-      
-    </ul>
-
-    <p>&copy; 2015. All rights reserved. </p>
-  </div>
+<div>
+	<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" height=106 src="http://music.163.com/outchain/player?type=2&id=16333268&auto=1&height=86" style="width:100%;"></iframe>
+	<canvas id="testCanvas" width="960" height="400"
+			style="background:#312"></canvas>
 </div>
-
-
-    <div class="content container">
-<div class="posts">
-
-      
-  <div class="post">
-    <h1 class="post-title">
-      <a href="http://airmusic.github.io/Unity-SvnTool/">
-        Unity SvnTool
-      </a>
-    </h1>
-
-    <span class="post-date">Wed, Sep 9, 2015</span>
-
-    
-  </div>
-  
-  <div class="post">
-    <h1 class="post-title">
-      <a href="http://airmusic.github.io/post/Blog-Tips/">
-        Blog Tips
-      </a>
-    </h1>
-
-    <span class="post-date">Wed, Aug 5, 2015</span>
-
-    <p><img src="http://img.itc.cn/photo/jsdU74MTPKn" alt="http://img.itc.cn/photo/jsdU74MTPKn" />
-</p>
-
-<p><a href="http://stackoverflow.com/questions/7993413/git-submodules-with-modified-and-untracked-content-why-and-how-to-remove-it">http://stackoverflow.com/questions/7993413/git-submodules-with-modified-and-untracked-content-why-and-how-to-remove-it</a></p>
-
-  </div>
-  
-  <div class="post">
-    <h1 class="post-title">
-      <a href="http://airmusic.github.io/post/Unity3D-SVN/">
-        Unity3D项目SVN资源管理的小技巧
-      </a>
-    </h1>
-
-    <span class="post-date">Wed, Aug 5, 2015</span>
-
-    <p>管理项目有多种工具，大家使用最多的是SVN和P4，P4对于美术资源非常合适，而SVN又适合代码资源。在手游时代，大家用的最多的引擎是Cocos和Unity3D，下面我主要说下Unity3D在SVN中的资源管理上传的一些小技巧和注意事项。</p>
-
-<p>一、别忘了meta！
-Unity3D的资源在编辑器编译后会自动生成一个meta文件，在默认的配置下，这个文件是隐藏的，所以要在文件夹选项的查看中的显示隐藏的文件，才会看到它。
-<img src="http://img.itc.cn/photo/jsdfbqI7Jx8" alt="http://img.itc.cn/photo/jsdfbqI7Jx8" />
-</p>
-
-<p>这个文件在我的理解下就是这个资源的身份证，里面有个ID，用于资源的引用，他们和资源长得和双胞胎一样，命名相同并带着后缀，只不过最后多了.meta的文件后缀。但是模型、音频、贴图文件的meta文件会保存模型与动画、音频、图片的属性，当你在编辑器中修改这些资源各种属性后，会修改相应的meta文件。
-<img src="http://img.itc.cn/photo/jsdfyCJGKzL" alt="http://img.itc.cn/photo/jsdfyCJGKzL" />
-
-但是我们经常往往在meta文件上出错，下面总结下经常出现的问题和解决方法。</p>
-
-<p>1、忘记上传meta文件：漏传meta文件会导致其他使用这个新资源的同学本地自动生成一个另外的meta，如果你自己或者别人发现了漏传，再补传后，那些已经自动生成meta文件的同学就会发现这个meta文件永远的冲突了，红叹号。因为编辑器编译的数据储存在本地的Library文件夹里，所以，上传资源的同学永远的记住这一点：资源一定要成对上传，不要忘记meta。同样，如果删除的话也要成对删除！还有文件夹也是有meta文件的哦，大家往往最多忘记上传的，就是文件夹对应的meta文件。但是工作中总有失误的时候，如果大家看到好多红叹号心烦的时候，只需要删掉本地的Library文件夹，从SVN上拉取最新的资源，然后打开编辑器花大概半小时的时间重新编译（去活动下身体，或者休息下眼镜吧），生成新的Library文件夹。基本上可以解决meta文件冲突的问题。</p>
-
-<p>2、除了重命名，千万不要复制meta文件。如果你想复制一个资源去制作类似效果的新资源时，千万不要复制meta文件，只需要复制资源，重命名后再进入编辑器自动生成新的meta，否则的话就会出现同ID的meta文件，导致新做的资源毁坏，变成编辑器无法识别的无效资源。只有在修改资源名称的时候才会复制meta文件，想要重命名资源，而且不丢失以前的引用关系，最快的方法就是把旧的文件连同meta文件一起复制，然后把复制的文件同时修改为新的名称，删除旧资源，重新上传新命名后的资源和meta文件即可。</p>
-
-<p>二、下载或上传时要关掉U3D编辑器</p>
-
-<p>当你要制作和修改一个资源的时候，首先确保你的资源是最新的，所以首先要更新SVN上的最新资源，然后打开编辑器，编辑器会编译一段时间。修改和制作完成后，要上传资源时，必须要保存场景文件，或者关闭编辑器，这时的资源才是保存成功的，否者，你所做出的修改都记录在内存里，不会保存在资源里，所以上传资源前养成保存场景文件或者关闭编辑器的习惯。总之一句话：上传或下载SVN资源，请关闭编辑器。</p>
-
-<p>三、小心.svn隐藏文件夹</p>
-
-<p>SVN目录下都会有.svn的隐藏文件夹，保存着SVN的目录结构与资源状态。在文件夹选项的查看中的显示隐藏的文件，你就会看到它。</p>
-
-<p><img src="http://img.itc.cn/photo/jsdfPQ5cvV8" alt="http://img.itc.cn/photo/jsdfPQ5cvV8" />
-</p>
-
-<p>SVN中的资源需要转移时，注意不要一起转移svn的隐藏目录。否则，不管你如何修改资源文件，你的文件状态会出现各种混乱。（其实是你本地认为资源上传了，但是其实并没有，都是.svn文件夹惹的祸）</p>
-
-<p>所以要把文件夹里的文件转移时，要使用SVN下的导出功能，把所有的文件导出到新的目录下。
-<img src="http://img.itc.cn/photo/jsdfnboWySg" alt="http://img.itc.cn/photo/jsdfnboWySg" />
-</p>
-
-<p>确保文件没有任何的SVN标记，然后重新上传新目录下的文件，删除旧目录下的文件。还有个笨办法，就是把要转移的文件夹剪切出来，然后把里面所有隐藏的.svn文件夹全部删掉，然后再放到新的目录里重新上传。</p>
-
-<p>四、资源无法上传</p>
-
-<p>出现这种情况的问题很多，比如资源冲突了、树冲突了、没有权限了、SVN服务器抽风了、密码过期了、网络断了。但是在确定不是以上原因的情况下，去根目录下使用清理（Clean）命令，然后重新更新SVN，一般都会解决了。（万能的小刷子！）
-<img src="http://img.itc.cn/photo/jsdfnboWySg" alt="http://img.itc.cn/photo/jsdfnboWySg" />
-</p>
-
-<p>以上就是我总结的几点Unity3D项目在SVN管理项目资源时的技巧经验，希望可以帮助到同样遇到这些问题的同学们</p>
-
-  </div>
-  
-  <div class="post">
-    <h1 class="post-title">
-      <a href="http://airmusic.github.io/post/unity-sometool/">
-        unity sometool
-      </a>
-    </h1>
-
-    <span class="post-date">Wed, Jul 15, 2015</span>
-
-    <p>NGUI动画扩展:<a href="https://github.com/yoroting/SRW_Project">https://github.com/yoroting/SRW_Project</a>
-<img src="http://img.itc.cn/photo/j8PKBrSKg8z" alt="http://img.itc.cn/photo/j8PKBrSKg8z" />
-</p>
-
-<p>卡通粒子效果:</p>
-
-<p><a href="https://github.com/yoroting/SRW_Project">https://github.com/yoroting/SRW_Project</a>
-<a href="https://www.assetstore.unity3d.com/cn/#!/content/23634">https://www.assetstore.unity3d.com/cn/#!/content/23634</a></p>
-
-<p>unity直接使用excel扩展:</p>
-
-<p><a href="http://kimsama.github.io/Unity-QuickSheet/">http://kimsama.github.io/Unity-QuickSheet/</a>
-<a href="https://github.com/Zesix/Impulse">https://github.com/Zesix/Impulse</a></p>
-
-<p>Unity框架:</p>
-
-<p><a href="https://github.com/dotBunny/Hydrogen.git">https://github.com/dotBunny/Hydrogen.git</a>
-<a href="http://hydrogen.dotbunny.com/getting-started/">http://hydrogen.dotbunny.com/getting-started/</a></p>
-
-<p>Unity TimeScale:
-<a href="https://github.com/onevcat/UnpauseMe.git">https://github.com/onevcat/UnpauseMe.git</a></p>
-
-<p><a href="https://github.com/brianasu/2d-pixelshadows.git">https://github.com/brianasu/2d-pixelshadows.git</a></p>
-
-<p>C#转换帮助类
-<a href="https://github.com/kenanhancer/Uni.Extensions.git">https://github.com/kenanhancer/Uni.Extensions.git</a></p>
-
-<p>Unity 阳光射线
-<a href="https://github.com/keijiro/unity-sunburst-effects.git">https://github.com/keijiro/unity-sunburst-effects.git</a></p>
-
-<p>私奔到三国源代码:
-<a href="https://github.com/fengyiqun/SANGUO.git">https://github.com/fengyiqun/SANGUO.git</a></p>
-
-<p>里面的聊天挺全
-<a href="https://github.com/kok3/test.git">https://github.com/kok3/test.git</a></p>
-
-<p>安卓版本编译环境搭建:
-[<a href="http://docs.unity3d.com/Manual/android-sdksetup.html]http://docs.unity3d.com/Manual/android-sdksetup.html">http://docs.unity3d.com/Manual/android-sdksetup.html]http://docs.unity3d.com/Manual/android-sdksetup.html</a></p>
-
-  </div>
-  
-  <div class="post">
-    <h1 class="post-title">
-      <a href="http://airmusic.github.io/post/Unity-Useful-Tool/">
-        Unity Useful Tool
-      </a>
-    </h1>
-
-    <span class="post-date">Mon, Jul 13, 2015</span>
-
-    <p><img src="http://img.itc.cn/photo/j8JJ00hpYnx" alt="http://img.itc.cn/photo/j8JJ00hpYnx" />
-</p>
-
-<p><a href="https://github.com/Magicolo/Glimpse">https://github.com/Magicolo/Glimpse</a></p>
-
-<p>一个非常好的游戏框架:
-<a href="https://github.com/Magicolo/SuperHedronCollider">https://github.com/Magicolo/SuperHedronCollider</a></p>
-
-<p>一个非常好的声音控制组件:
-<a href="https://github.com/xvly/Tools">https://github.com/xvly/Tools</a></p>
-
-<p>声音写入文件:
-<a href="https://github.com/drawcode/game-lib-engine">https://github.com/drawcode/game-lib-engine</a>
-<a href="https://github.com/SamSeidenberg/RE">https://github.com/SamSeidenberg/RE</a></p>
-
-<p>Iphone播放声音使用听筒而不是扬声器的bugfix:
-<a href="https://github.com/cbaltzer/UnitySpeakerFix">https://github.com/cbaltzer/UnitySpeakerFix</a></p>
-
-<p>Unity语音转文字插件:
-<a href="https://github.com/sidbansal00/Calci">https://github.com/sidbansal00/Calci</a></p>
-
-<p><a href="http://developer.att.com/apis/speech/docs/v3">插件官网</a></p>
-
-<p>提供声音文件转换为字节流:
-<a href="https://github.com/dominikkrejcik/smartscarf/blob/d7e4b6663f7b608bf4f941a39d410cfa44de6f90/unity/smartscarf/Assets/User.cs">https://github.com/dominikkrejcik/smartscarf/blob/d7e4b6663f7b608bf4f941a39d410cfa44de6f90/unity/smartscarf/Assets/User.cs</a></p>
-
-<hr />
-
-<p>Unity带声音压缩Speex:
-<a href="https://github.com/SPCoffey/HorrorGame">https://github.com/SPCoffey/HorrorGame</a></p>
-
-<p>(这个没看懂使用方法)
-<a href="https://github.com/nulhax/VOID">https://github.com/nulhax/VOID</a>
-<a href="https://github.com/BernhardGlueck/Poker">https://github.com/BernhardGlueck/Poker</a></p>
-
-<hr />
-
-<p><em>表达式解析:</em></p>
-
-<p><a href="https://github.com/feiton777/UnityChanTest">https://github.com/feiton777/UnityChanTest</a></p>
-
-<p><em>文件加密:</em></p>
-
-<p><a href="https://github.com/feiton777/UnityChanTest">https://github.com/feiton777/UnityChanTest</a></p>
-
-<hr />
-
-<p>插件编写:</p>
-
-<p>不错的插件示例:
-<a href="https://github.com/ManuYasha/ColorTap">https://github.com/ManuYasha/ColorTap</a></p>
-
-<p>unity快捷键
-<a href="http://docs.unity3d.com/ScriptReference/MenuItem.html">http://docs.unity3d.com/ScriptReference/MenuItem.html</a>
-<img src="http://img.itc.cn/photo/jsu36vO8EdW" alt="http://img.itc.cn/photo/jsu36vO8EdW" />
-</p>
-
-  </div>
-  
-  <div class="post">
-    <h1 class="post-title">
-      <a href="http://airmusic.github.io/post/taig-jb/">
-        苹果破解版本恢复出厂设置
-      </a>
-    </h1>
-
-    <span class="post-date">Thu, Jul 9, 2015</span>
-
-    <p><a href="http://www.mobile01.com/topicdetail.php?f=591&amp;t=4128627">http://www.mobile01.com/topicdetail.php?f=591&amp;t=4128627</a></p>
-
-<p><a href="http://zh-cn.stealthsettings.com/cum-putem-reseta-iphone-ul-fara-a-pierde-jailbreak-ul.html">http://zh-cn.stealthsettings.com/cum-putem-reseta-iphone-ul-fara-a-pierde-jailbreak-ul.html</a></p>
-
-<p>插件源:</p>
-
-<p><a href="http://cydia.myrepospace.com/iLEXiNFO/">http://cydia.myrepospace.com/iLEXiNFO/</a></p>
-
-  </div>
-  
-  <div class="post">
-    <h1 class="post-title">
-      <a href="http://airmusic.github.io/post/Git-Submodule/">
-        Git Submodule
-      </a>
-    </h1>
-
-    <span class="post-date">Thu, Jul 2, 2015</span>
-
-    <p>1.添加子模块</p>
-
-<pre><code class="language-sh">$ git submodule add [url] [path]
-</code></pre>
-
-<p>2.查看子模块</p>
-
-<pre><code class="language-sh">$ git submodule —-查看当前项目用到的子模块
-</code></pre>
-
-<p>3.初始化子模块</p>
-
-<pre><code class="language-sh">$ git submodule init —-只在首次检出仓库时运行一次就行
-</code></pre>
-
-<p>4.更新子模块</p>
-
-<pre><code class="language-sh">$ git submodule update —-每次更新或切换分支后都需要运行一下
-</code></pre>
-
-<p>5.删除子模块：（这一步比较麻烦，只是简单rm的话，可能会出现难以定位的bug）</p>
-
-<pre><code class="language-sh">$ git rm --cached [path]
-编辑.gitmodules文件，将子模块的相关配置节点删除掉
-编辑.git/config文件，将子模块的相关配置节点删除掉[这一步好像很不科学，为什么信息要保存两份？]
-手动删除子模块残留的目录
-</code></pre>
-
-  </div>
-  
-  <div class="post">
-    <h1 class="post-title">
-      <a href="http://airmusic.github.io/post/Welcome/">
-        Welcome
-      </a>
-    </h1>
-
-    <span class="post-date">Wed, Jul 1, 2015</span>
-
-    <p>欢迎欢迎,热烈欢迎&hellip;</p>
-
-<p>欢迎欢迎,热烈欢迎&hellip;</p>
-
-<p>欢迎欢迎,热烈欢迎&hellip;</p>
-
-<p>欢迎欢迎,热烈欢迎&hellip;</p>
-
-<p>欢迎欢迎,热烈欢迎&hellip;</p>
-
-  </div>
-  
-  <div class="post">
-    <h1 class="post-title">
-      <a href="http://airmusic.github.io/post/UnityVersionControl/">
-        UnityVersionControl
-      </a>
-    </h1>
-
-    <span class="post-date">Wed, Jul 1, 2015</span>
-
-    
-
-<h1 id="unity-版本控制插件:1637692fc8b5bf26726f27ff2c06bf18">Unity 版本控制插件</h1>
-
-<p>$ hugo server &ndash;theme=hyde &ndash;buildDrafts</p>
-
-<p>2 pages created</p>
-
-<p>0 tags created</p>
-
-<p>0 categories created</p>
-
-<p>in 5 ms</p>
-
-<p>Serving pages from exampleHugoSite/public</p>
-
-<p>Web Server is available at <a href="http://localhost:1313">http://localhost:1313</a></p>
-
-<p>Press Ctrl+C to stop</p>
-
-<table>
-<thead>
-<tr>
-<th>Name</th>
-<th align="right">Age</th>
-</tr>
-</thead>
-
-<tbody>
-<tr>
-<td>Bob</td>
-<td align="right">27</td>
-</tr>
-
-<tr>
-<td>Alice</td>
-<td align="right">23</td>
-</tr>
-
-<tr>
-<td>=======</td>
-<td align="right">====</td>
-</tr>
-
-<tr>
-<td>Charlie</td>
-<td align="right">4</td>
-</tr>
-</tbody>
-</table>
-
-  </div>
-  
-</div>
-</div>
-
-  </body>
+</body>
 </html>
