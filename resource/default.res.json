@@ -1,0 +1,33 @@
+{
+	"groups":[{
+			"keys":"heart_json,heart_png",
+			"name":"preload"
+		}],
+	"resources":[
+		{
+			"name":"bgImage",
+			"type":"image",
+			"url":"assets/bg.jpg"
+		},
+		{
+			"name":"egretIcon",
+			"type":"image",
+			"url":"assets/egret_icon.png"
+		},
+		{
+			"name":"description",
+			"type":"json",
+			"url":"config/description.json"
+		},
+		{
+			"name":"heart_json",
+			"type":"json",
+			"url":"assets/heart/heart.json"
+		},
+		{
+			"name":"heart_png",
+			"type":"image",
+			"url":"assets/heart/heart.png"
+		}
+	]
+}
